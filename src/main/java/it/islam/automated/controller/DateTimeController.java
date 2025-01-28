@@ -17,13 +17,13 @@ public class DateTimeController {
         this.dateTimeService = dateTimeService;
     }
 
-    @PostMapping("/get-date-time")
+    @GetMapping("/get-date-time")
     public GenericResponse<DateTime> printDateTime (){
-        return new GenericResponse<>(HttpStatus.OK.value(), null, dateTimeService.getDateTime());
+        return new GenericResponse<>(HttpStatus.OK.value(), "OK", dateTimeService.getDateTime());
     }
 
-    @GetMapping("/get-history")
+    @GetMapping("/get-all-requests")
     public GenericResponse<List<DateTime>> printHistory() {
-        return new GenericResponse<>(HttpStatus.OK.value(), null, dateTimeService.getAll());
+        return new GenericResponse<>(HttpStatus.OK.value(), "OK", dateTimeService.getAll());
     }
 }

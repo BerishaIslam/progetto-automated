@@ -1,11 +1,15 @@
 package it.islam.automated.DTO.responses;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nullable;
 
 public class GenericResponse <T>{
-    private T data;
-    private String error;
+    @JsonProperty("status")
     private Integer status;
+    @JsonProperty("error")
+    private String error;
+    @JsonProperty("data")
+    private T data;
 
     public GenericResponse(Integer status, @Nullable String error, @Nullable T data){
         this.status = status;
