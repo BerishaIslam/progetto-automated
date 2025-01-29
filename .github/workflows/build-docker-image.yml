@@ -23,7 +23,7 @@ jobs:
           echo "TAG=$TAG" >> $GITHUB_ENV
 
       - name: Convert repository name to lowercase
-        run: echo "REPO_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        run: echo "REPO_NAME=$(echo ${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Build Docker image
         run: docker build -t ghcr.io/${{ github.repository.lowercase }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} .
