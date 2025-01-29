@@ -4,7 +4,7 @@ FROM maven:3.9-amazoncorretto-17-alpine AS build
 WORKDIR /app
 
 RUN apk update && apk add --no-cache git
-RUN git clone https://github.com/BerishaIslam/progetto-automated.git progetto && cd progetto && mvn clean install -DskipTests
+RUN git clone https://github.com/BerishaIslam/progetto-automated.git progetto && cd progetto && mvn clean install
 
 # Seconda fase: esegue l'applicazione
 FROM openjdk:17-jdk-slim
