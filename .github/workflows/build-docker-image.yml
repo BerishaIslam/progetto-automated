@@ -23,10 +23,10 @@ jobs:
           echo "TAG=$TAG" >> $GITHUB_ENV
 
       - name: Convert repository name to lowercase
-        run: echo "REPO_NAME=$(echo ${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        run: echo "REPO_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Build Docker image
-        run: docker build -t ghcr.io/${{REPO_NAME}}.
+        run: docker build -t ghcr.io/${{ github.repository.lowercase }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} .
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
@@ -37,25 +37,25 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push ghcr.io/${{REPO_NAME}}
+          docker push ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
         id: create_release
         with:
           tag_name: v${{ env.TAG }}
-          release_name: "Release $${{REPO_NAME}}"
+          release_name: "Release ${{ env.IMAGE_NAME }}:${{ env.TAG }}"
           body: |
             Docker image is available in the GitHub Container Registry.
 
             To pull the image:
             ```bash
-            docker pull ghcr.io/${{REPO_NAME}}
+            docker pull ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
             ```
 
             To run the image:
             ```bash
-            docker run -p <your-port>:8080 ghcr.io/${{REPO_NAME}}
+            docker run -p <your-port>:8080 ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
             ```
           draft: false
           prerelease: false
