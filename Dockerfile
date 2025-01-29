@@ -1,16 +1,20 @@
-FROM openjdk:17-jdk-slim
+FROM maven:3.9-amazoncorretto-17-alpine AS build
 
-# Imposta la directory di lavoro nel contenitore
 WORKDIR /app
 
-# Copia il file JAR generato nel contenitore
-COPY target/automated-0.0.1-SNAPSHOT.jar app.jar
+# Clona la repository
+RUN apk update && apk add --no-cache git
+RUN git clone https://github.com/BerishaIslam/progetto-automated.git progetto && cd progetto && mvn clean install -DskipTests
 
-# Espone la porta 8080 (tipica per le app Spring Boot)
-EXPOSE 8080
+# Seconda fase: esegue l'applicazione
+FROM openjdk:17-jdk-slim
 
-# Imposta il fuso orario di Roma
+WORKDIR /app
+
 ENV TZ=Europe/Rome
 
-# Comando di avvio dell'applicazione
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=build /app/progetto/target/*.jar app.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "app.jar"]
