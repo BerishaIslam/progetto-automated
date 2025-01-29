@@ -37,7 +37,7 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+          docker push ghcr.io/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
@@ -50,12 +50,12 @@ jobs:
 
             To pull the image:
             ```bash
-            docker pull ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+            docker pull ghcr.io/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
             ```
 
             To run the image:
             ```bash
-            docker run -p <your-port>:8080 ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+            docker run -p <your-port>:8080 ghcr.io/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
             ```
           draft: false
           prerelease: false
