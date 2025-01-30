@@ -23,7 +23,7 @@ public class DateTimeController {
     }
 
     @GetMapping("/get-all-requests")
-    public GenericResponse<List<DateTime>> printHistory() {
+    public GenericResponse<List<DateTime>> printAllRequests() {
         return new GenericResponse<>(HttpStatus.OK.value(), "OK", dateTimeService.getAll());
     }
 }
