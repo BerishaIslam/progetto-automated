@@ -52,6 +52,11 @@ jobs:
             ```bash
             docker pull ghcr.io/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
             ```
+            
+            To run the db:
+            ```bash
+            docker run -d --name automated_db -e POSTGRES_DB=automated_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres:15
+            ```
 
             To run the image:
             ```bash
