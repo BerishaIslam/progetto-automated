@@ -46,21 +46,9 @@ jobs:
           tag_name: v${{ env.TAG }}
           release_name: "Release ${{ env.IMAGE_NAME }}:${{ env.TAG }}"
           body: |
-            Docker image is available in the GitHub Container Registry.
-
-            To pull the image:
+             To create and run the images, go to "progetto-automated" folder and run the command:
             ```bash
-            docker pull ghcr.io/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
-            ```
-            
-            To run the db:
-            ```bash
-            docker run -d --name automated_db -e POSTGRES_DB=automated_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres:15
-            ```
-
-            To run the image:
-            ```bash
-            docker run -p <your-port>:8080 -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/automated_db -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=postgres ghcr.io/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+            docker compose up --build
             ```
           draft: false
           prerelease: false
