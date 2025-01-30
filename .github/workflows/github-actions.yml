@@ -55,7 +55,7 @@ jobs:
 
             To run the image:
             ```bash
-            docker run -p <your-port>:8080 ghcr.io/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+            docker run -p <your-port>:8080 -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/automated_db -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=postgres ghcr.io/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
             ```
           draft: false
           prerelease: false
