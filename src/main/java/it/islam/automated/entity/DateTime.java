@@ -11,7 +11,8 @@ import java.time.format.DateTimeFormatter;
 @Entity
 public class DateTime {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String date;
     private String time;
 
