@@ -46,7 +46,7 @@ jobs:
           tag_name: v${{ env.TAG }}
           release_name: "Release ${{ env.IMAGE_NAME }}:${{ env.TAG }}"
           body: |
-            To create and run the images, go to progetto-automated folder and run the command:
+            To create and run the images, go to "progetto-automated" folder and run the command:
             ```bash
             docker compose up --build
             ```
